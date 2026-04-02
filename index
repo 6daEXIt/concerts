@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>6daEXIt — Premieres 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=IBM+Plex+Mono:ital,wght@0,300;0,400;1,300&family=Hanken+Grotesk:ital,wght@0,200;0,400;0,700;1,200&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #080706;
+  --white: #f0ece4;
+  --off: #b8b0a5;
+  --gold: #c9a96e;
+  --glass: rgba(240, 236, 228, 0.06);
+  --glass-border: rgba(240, 236, 228, 0.12);
+  --solid: rgba(8, 7, 6, 0.88);
+  --frost: rgba(20, 18, 15, 0.65);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--white);
+  font-family: 'Hanken Grotesk', sans-serif;
+  font-weight: 200;
+  overflow-x: hidden;
+}
+
+/* ── STICKY PHOTO BACKGROUND ── */
+.bg-photo {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  background-image: url('F8EF36D5-09AD-44FF-83F8-0A09BB306B6F.JPEG');
+  background-size: cover;
+  background-position: center 25%;
+  filter: brightness(0.38) saturate(0.65);
+  will-change: transform;
+}
+
+.bg-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ── CONTENT STACK ── */
+.page { position: relative; z-index: 1; }
+
+/* ══ LANG TOGGLE ══ */
+.lang-bar {
+  position: fixed;
+  top: 0; right: 0;
+  z-index: 200;
+  display: flex;
+}
+.lang-btn {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  background: rgba(8,7,6,0.7);
+  border: none;
+  border-left: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
+  color: var(--off);
+  padding: 0.7em 1.1em;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  transition: all 0.2s;
+}
+.lang-btn.active { color: var(--gold); }
+.lang-btn:hover { color: var(--white); }
+
+/* ══ HERO ══ */
+.hero {
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: 0;
+  position: relative;
+}
+
+.hero-top {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2rem 2rem 0;
+}
+
+.hero-eyebrow {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5rem, 20vw, 14rem);
+  line-height: 0.88;
+  letter-spacing: -0.01em;
+  color: var(--white);
+  mix-blend-mode: screen;
+  opacity: 0.95;
+}
+
+.hero-title em {
+  font-family: 'DM Serif Display', serif;
+  font-style: italic;
+  font-size: 0.55em;
+  display: block;
+  line-height: 1.1;
+  margin-top: 0.15em;
+  color: var(--gold);
+  mix-blend-mode: normal;
+  letter-spacing: 0.01em;
+}
+
+.hero-bottom {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border-top: 1px solid var(--glass-border);
+  margin-top: 2rem;
+}
+
+.hero-meta {
+  padding: 1.4rem 2rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  line-height: 1.9;
+  color: var(--off);
+  text-transform: uppercase;
+}
+.hero-meta strong { color: var(--white); font-weight: 400; }
+.hero-meta:first-child { border-right: 1px solid var(--glass-border); }
+
+.scroll-cue {
+  position: absolute;
+  bottom: 6rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  animation: fade-bob 3s ease-in-out infinite;
+}
+.scroll-cue span {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.55rem;
+  letter-spacing: 0.25em;
+  color: var(--gold);
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+}
+.scroll-line { width: 1px; height: 40px; background: linear-gradient(var(--gold), transparent); }
+@keyframes fade-bob { 0%,100%{opacity:0.3;transform:translateX(-50%) translateY(0)} 50%{opacity:0.7;transform:translateX(-50%) translateY(6px)} }
+
+/* ══ SECTION TYPES ══ */
+
+.s-transparent { padding: 5rem 2rem; position: relative; }
+
+.s-solid {
+  background: var(--solid);
+  backdrop-filter: blur(2px);
+  padding: 4rem 2rem;
+  position: relative;
+}
+
+.s-frost {
+  background: var(--frost);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-top: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
+  padding: 4rem 2rem;
+  position: relative;
+}
+
+.s-photo-break {
+  height: 40vw;
+  max-height: 420px;
+  min-height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+.s-photo-break img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  filter: saturate(0.8) brightness(0.9);
+}
+.s-photo-break-label {
+  position: absolute;
+  bottom: 1.5rem;
+  right: 2rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  text-transform: uppercase;
+}
+
+.inner { max-width: 760px; margin: 0 auto; }
+.inner-wide { max-width: 960px; margin: 0 auto; }
+
+/* ══ SECTION LABEL ══ */
+.s-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.s-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--glass-border);
+}
+
+/* ══ INTRO ══ */
+.intro-body {
+  font-size: clamp(1.05rem, 2.8vw, 1.35rem);
+  line-height: 1.75;
+  color: var(--white);
+  font-weight: 200;
+  max-width: 640px;
+}
+.intro-body strong { font-weight: 700; color: var(--white); }
+
+/* ══ PROGRAMME ══ */
+.prog-list { list-style: none; }
+.prog-item {
+  display: grid;
+  grid-template-columns: 2.8rem 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.2rem 0;
+  border-bottom: 1px solid var(--glass-border);
+  transition: background 0.2s, padding 0.2s, margin 0.2s;
+}
+.prog-item:last-child { border-bottom: none; }
+.prog-item:hover { background: var(--glass); margin: 0 -2rem; padding-left: 2rem; padding-right: 2rem; }
+
+.prog-num {
+  width: 2rem; height: 2rem;
+  border: 1px solid var(--glass-border);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.58rem;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+.prog-title-text {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1rem, 2.5vw, 1.3rem);
+  color: var(--white);
+  font-style: italic;
+}
+.prog-composer-text {
+  font-size: 0.78rem;
+  color: var(--off);
+  font-family: 'IBM Plex Mono', monospace;
+  margin-top: 0.25rem;
+}
+.prog-flag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--gold);
+  letter-spacing: 0.05em;
+  flex-shrink: 0;
+}
+
+.legend-box {
+  margin-top: 2rem;
+  padding: 1rem 1.2rem;
+  border-left: 2px solid var(--gold);
+  background: var(--glass);
+}
+.legend-box p {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--off);
+  line-height: 1.8;
+  font-style: italic;
+}
+
+/* ══ PERFORMERS ══ */
+.performers-wrap {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0;
+}
+.performer-item {
+  padding: 1.2rem 1rem;
+  border-right: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
+}
+.performer-item:nth-child(odd) { background: var(--glass); }
+.p-name { font-size: 0.92rem; font-weight: 700; color: var(--white); margin-bottom: 0.3rem; }
+.p-instrument {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--gold);
+  line-height: 1.5;
+  font-style: italic;
+}
+
+/* ══ PIECE NOTES ══ */
+.piece-block { margin-bottom: 3.5rem; }
+.piece-block:last-child { margin-bottom: 0; }
+
+.piece-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid var(--glass-border);
+}
+.piece-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  letter-spacing: 0.03em;
+  color: var(--white);
+  line-height: 1;
+}
+.piece-composer-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.piece-body { font-size: 0.95rem; line-height: 1.85; color: var(--off); font-weight: 200; }
+.piece-quote {
+  margin: 1.2rem 0;
+  padding: 1.2rem 1.5rem;
+  background: var(--glass);
+  border-left: 2px solid var(--gold);
+  font-style: normal;
+  font-size: 0.93rem;
+  color: #c8c0b6;
+  line-height: 1.9;
+  font-weight: 300;
+  letter-spacing: 0.01em;
+}
+/* English quotes get italic — Latin fonts handle it well */
+#lang-en .piece-quote {
+  font-style: italic;
+  font-weight: 200;
+}
+.piece-quote cite {
+  display: block;
+  margin-top: 0.7rem;
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.62rem;
+  color: var(--gold);
+  font-style: normal;
+  letter-spacing: 0.1em;
+}
+
+/* ══ COMPOSERS ══ */
+.composer-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+@media(max-width: 580px){ .composer-grid { grid-template-columns: 1fr; } }
+
+.composer-card {
+  padding: 2rem 1.5rem;
+  border: 1px solid var(--glass-border);
+  background: var(--glass);
+  transition: background 0.25s;
+}
+.composer-card:hover { background: rgba(240,236,228,0.1); }
+.c-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--white);
+  margin-bottom: 0.8rem;
+}
+.c-bio { font-size: 0.85rem; line-height: 1.8; color: var(--off); font-weight: 200; }
+
+/* ══ BIG TEXT DIVIDER ══ */
+.big-divider { padding: 3rem 2rem; overflow: hidden; }
+.big-divider-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3rem, 15vw, 9rem);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(240,236,228,0.15);
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  line-height: 1;
+  user-select: none;
+  will-change: transform;
+}
+
+/* ══ ABOUT ══ */
+.about-cols {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  align-items: start;
+}
+@media(max-width: 600px){ .about-cols { grid-template-columns: 1fr; gap: 2rem; } }
+
+.about-col-label {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2rem, 6vw, 3.5rem);
+  line-height: 1;
+  color: var(--white);
+  position: sticky;
+  top: 2rem;
+}
+.about-text { font-size: 0.93rem; line-height: 1.9; color: var(--off); font-weight: 200; }
+.about-text + .about-text { margin-top: 1.2rem; }
+
+/* ══ FOOTER ══ */
+.footer {
+  padding: 3rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--glass-border);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.footer-brand { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; color: var(--white); letter-spacing: 0.05em; }
+.footer-link a {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  color: var(--gold);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(201,169,110,0.3);
+  padding-bottom: 2px;
+  transition: all 0.2s;
+}
+.footer-link a:hover { color: var(--white); border-color: var(--white); }
+
+/* ══ REVEAL ══ */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.in { opacity: 1; transform: none; }
+
+@media(max-width: 500px) {
+  .hero-bottom { grid-template-columns: 1fr; }
+  .hero-meta:first-child { border-right: none; border-bottom: 1px solid var(--glass-border); }
+  .prog-item { grid-template-columns: 2.2rem 1fr; }
+  .prog-flag { display: none; }
+}
+</style>
+</head>
+<body>
+
+<div class="bg-photo" id="bgPhoto"></div>
+
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('el')">ΕΛ</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
+
+<div class="page">
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-top">
+    <div class="hero-eyebrow" id="hero-eyebrow">6daEXIt Improvisation Ensemble — Θεσσαλονίκη 2026</div>
+    <h1 class="hero-title">
+      PREMIERES<br>
+      
+    </h1>
+  </div>
+  <div class="hero-bottom">
+    <div class="hero-meta"><strong id="hero-label-date">Ημερομηνία</strong><br><span id="hero-date">Παρασκευή<br>17 Απριλίου 2026</span></div>
+    <div class="hero-meta"><strong id="hero-label-comp">Συνθέτες</strong><br>lo wie · Andrew Weathers<br>Kevin Corcoran · Anton Lukoszevieze</div>
+  </div>
+  <div class="scroll-cue"><span>scroll</span><div class="scroll-line"></div></div>
+</section>
+
+<!-- ══ GREEK ══ -->
+<div id="lang-el">
+
+<section class="s-transparent">
+  <div class="inner reveal">
+    <div class="s-label">Παρουσίαση</div>
+    <p class="intro-body">Οι <strong>6daEXIt Improvisation Ensemble</strong>  παρουσιάζουν 4 έργα σύγχρονης πειραματικής μουσικής. Τα έργα αυτά προέρχονται από κάλεσμα για έργα <strong>γραφικής και λεκτικής σημειογραφίας</strong>  σε συγκεκριμένους συνθέτες απ’ όλον τον κόσμο και θα εκτελεστούν εδώ για δεύτερη φορά μετά από την <strong>παγκόσμια πρεμιέρα</strong> τους στη συναυλία των 6daEXIt στο ΚΕΤ (Αθήνα, 17-3-2026). 3 από αυτά μάλιστα γράφτηκαν ειδικά για τους 6daEXIt.
+
+Το σύνολο εστιάζει σε έργα ανοιχτής μορφής, τα οποία επαναπροσδιορίζουν τη σχέση συνθέτη, εκτελεστή και αποδέκτη. Η παρτιτούρα δεν είναι ένα τελικό διάγραμμα με προκαθορισμένες νότες, αλλά ένα σύνολο από κανόνες ή προθέσεις, στρατηγικές και ερεθίσματα που μπορούν να αντιστοιχηθούν σε δράσεις λιγότερο ή περισσότερο καθορισμένες. Τα έργα δημιουργούν έτσι το πλαίσιο δράσης και αντίληψης - ένα παράδειγμα είναι το κομμάτι -6-, το οποίο διαμορφώνεται ως επιτέλεση καθ' όλη τη διάρκεια της συναυλίας, δημιουργώντας ένα πλαίσιο που περιλαμβάνει μέσα του οτιδήποτε άλλο, χωρίς να το επικαλύπτει με ορατό τρόπο.
+
+Η τελική μορφή των έργων παραμένει ρευστή και δημιουργείται σε πραγματικό χρόνο από το σύνολο, καθιστώντας κάθε εκτέλεση μια μοναδική, μη επαναλήψιμη ηχητική εκδοχή, μέσα από την αλληλεπίδραση και την ακρόαση. Οι πρακτικές αυτές προσεγγίζουν τον κοινό τόπο ανάμεσα στην έννοια του έργου και του μερικώς ελεγχόμενου ελεύθερου - μη ιδιωματικού - αυτοσχεδιασμού.
+</p>
+  </div>
+</section>
+
+<div class="big-divider"><div class="big-divider-text" data-drift="-1">GRAPHIC · VERBAL · SCORE</div></div>
+
+<section class="s-solid">
+  <div class="inner reveal">
+    <div class="s-label">Πρόγραμμα</div>
+    <ul class="prog-list">
+      <li class="prog-item"><div class="prog-num">01</div><div><div class="prog-title-text">-6-</div><div class="prog-composer-text">lo wie, 2025</div></div><div class="prog-flag">* **</div></li>
+      <li class="prog-item"><div class="prog-num">02</div><div><div class="prog-title-text">Reverse Horizon</div><div class="prog-composer-text">Andrew Weathers, 2025</div></div><div class="prog-flag">*</div></li>
+      <li class="prog-item"><div class="prog-num">03</div><div><div class="prog-title-text">Figure Ground</div><div class="prog-composer-text">Kevin Corcoran, 2025</div></div><div class="prog-flag">*</div></li>
+      <li class="prog-item"><div class="prog-num">04</div><div><div class="prog-title-text">Lost Opera 4</div><div class="prog-composer-text">Anton Lukoszevieze, 2024</div></div><div class="prog-flag"></div></li>
+      <li class="prog-item"><div class="prog-num">05</div><div><div class="prog-title-text">Lost Opera 13</div><div class="prog-composer-text">Anton Lukoszevieze, 2024</div></div><div class="prog-flag"></div></li>
+      <li class="prog-item"><div class="prog-num">06</div><div><div class="prog-title-text">Lost Opera 6</div><div class="prog-composer-text">Anton Lukoszevieze, 2024</div></div><div class="prog-flag"></div></li>
+      <li class="prog-item"><div class="prog-num">07</div><div><div class="prog-title-text">Lost Opera 7</div><div class="prog-composer-text">Anton Lukoszevieze, 2024</div></div><div class="prog-flag"></div></li>
+    </ul>
+    <div class="legend-box">
+      <p>* Έργο γραμμένο για τους 6daEXIt</p>
+      <p>** Η εκτέλεση λαμβάνει χώρα καθ' όλη τη διάρκεια της συναυλίας</p>
+    </div>
+  </div>
+</section>
+
+<section class="s-frost">
+  <div class="inner-wide reveal">
+    <div class="s-label">Οι 6daEXIt στις 17–4–2026</div>
+    <div class="performers-wrap">
+      <div class="performer-item"><div class="p-name">Βαλσαμάρα Ιωάννα</div><div class="p-instrument">synthesizer</div></div>
+      <div class="performer-item"><div class="p-name">Δημητρούδης Γιάννης</div><div class="p-instrument">synthesizer</div></div>
+      <div class="performer-item"><div class="p-name">Κουκούλη Λίνα</div><div class="p-instrument">μελόντικα, τηλεβόας,<br>slide whistle, αντικείμενα</div></div>
+      <div class="performer-item"><div class="p-name">Λαζίδης Φώτης</div><div class="p-instrument">tablet, fx</div></div>
+      <div class="performer-item"><div class="p-name">Ντούζας Αλέξανδρος</div><div class="p-instrument">ηλεκτρική κιθάρα</div></div>
+      <div class="performer-item"><div class="p-name">Παπαλάμπρου Ιωσηφίνα</div><div class="p-instrument">ηλεκτρικό μπάσο, αντικείμενα</div></div>
+      <div class="performer-item"><div class="p-name">Παρπαρά Χρυσή</div><div class="p-instrument">ακορντεόν, αντικείμενα</div></div>
+      <div class="performer-item"><div class="p-name">Πορφυριάδης Αλέξης</div><div class="p-instrument">πιάνο</div></div>
+      <div class="performer-item"><div class="p-name">Φωτιάδης Αντώνης</div><div class="p-instrument">σαξόφωνο</div></div>
+      <div class="performer-item"><div class="p-name">Χωλόπουλος Γιώργος</div><div class="p-instrument">laptop, αντικείμενα</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="s-photo-break">
+  <img src="F8EF36D5-09AD-44FF-83F8-0A09BB306B6F.JPEG" alt="6daEXIt visual" loading="lazy">
+  <span class="s-photo-break-label">6daEXIt — 2026</span>
+</div>
+
+<section class="s-transparent">
+  <div class="inner reveal">
+    <div class="s-label">Σχετικά με τα κομμάτια</div>
+    <div class="piece-block">
+      <div class="piece-header"><div class="piece-name">-6-</div><div class="piece-composer-tag">lo wie · 2025</div></div>
+      <div class="piece-body">6 ήχοι. Τα όρια εκτέλεσης ή ακρόασης, συμμετοχής ή μη, ενότητας και συνοχής ή μη, ενός έργου.<div class="piece-quote">«Ό,τι είναι προορισμένο να ακουστεί,<br>θα ακουστεί από μόνο του.»<cite>— lo wie, 2026</cite></div></div>
+    </div>
+    <div class="piece-block">
+      <div class="piece-header"><div class="piece-name">Reverse Horizon</div><div class="piece-composer-tag">Andrew Weathers · 2025</div></div>
+      <div class="piece-body"><div class="piece-quote">«Για πολλά χρόνια έζησα στο Llano Estacado του Δυτικού Τέξας, μια αραιοκατοικημένη αλλά αχανή περιοχή οροπεδίων. Ο ντόπιος τραγουδιστής της κάντρι, Terry Allen, αστειεύεται λέγοντας πως μια μέρα με καθαρό ουρανό μπορείς να δεις μέχρι και το πίσω μέρος του κεφαλιού σου, αν κοιτάξεις αρκετά προσεκτικά. Χωρίς τοπογραφία, αστικούς ορίζοντες ή γραμμές δέντρων, ο ορίζοντας είναι το καθοριστικό χαρακτηριστικό αυτής της γης. Έγραψα το Reverse Horizon ακριβώς πριν φύγω οριστικά από το Llano, αφήνοντας την απέραντη έκταση για έναν κόσμο πιο κλειστοφοβικό. Τα σημάδια στην παρτιτούρα προέρχονται από οπτικά πεδία και διαδρομές ανάμεσα στο Llano και το Πουέμπλο του Κολοράντο, το νέο μου σπίτι. Όπως πάντα, είναι μια προσπάθεια να βρεθεί μια ισορροπία ανάμεσα στη μνήμη και το ρίζωμα — ίσως αυτή να βρίσκεται σε ένα περίγραμμα ή σε μια μελωδία.»<cite>— Andrew Weathers, 2026</cite></div></div>
+    </div>
+    <div class="piece-block">
+      <div class="piece-header"><div class="piece-name">Figure Ground</div><div class="piece-composer-tag">Kevin Corcoran · 2025</div></div>
+      <div class="piece-body"><div class="piece-quote">«Το Figure Ground Το Figure Ground ξεκινά με έναν ηχητικό περίπατο ως μια ενσώματη πρακτική ηχογράφησης πεδίου, η οποία μεταγράφεται σε μουσική παρτιτούρα για εκτέλεση από σύνολο. Κατά τη διάρκεια του περιπάτου, γραμμικές χαράξεις που γίνονται βαδίζοντας σε ποικίλα εδάφη με πένα και χαρτί στο χέρι, συνοδεύονται από φωτογραφίες που αποτυπώνουν την υλικότητα της πέτρας, του χώματος, της οργανικής ύλης του εδάφους, του ξύλου και της άμμου που διασχίζονται. Οι χαράξεις και οι εικόνες παίρνουν τη θέση της ηχητικής εγγραφής, προκειμένου η ακρόαση να βιωθεί ως μια πρακτική που γίνεται αισθητή ως δόνηση σε ολόκληρο το σώμα και δεν περιορίζεται στην αντίληψη μέσω του τυμπάνου του αυτιού. Ως μουσική παρτιτούρα, αυτές οι γραμμές λειτουργούν ως προτάσεις για το παίξιμο ενός οργάνου με ανοιχτό τρόπο (όπως η χρήση διευρυμένων τεχνικών ή αντικειμένων) και ως οδηγίες για τη διάσχιση του χώρου της επιτέλεσης μεταφέροντας ένα μουσικό όργανο. Οι φωτογραφίες που απεικονίζουν τις τραχιές, λεπτές και λείες ποιότητες του εδάφους, τη σύνθεση του εδάφους από την οποία αναδύονται οι γραμμικές μορφές του περιπάτου, γίνονται οπτικές υποβολές για μουσικά ηχοχρώματα. Αυτές οι οπτικές πτυχές της παρτιτούρας συνοδεύονται από σύντομα κείμενα που περιγράφουν τις προσεγγίσεις της διαδρομής, δίνοντας τον τόνο για μουσικές αποφάσεις που αφορούν τον ρυθμό, την πρόσβαση, την ισορροπία και την αλληλεπίδραση.
+
+Το Figure Ground συνδυάζει αισθητικές πρακτικές περιβαλλοντικής ακρόασης, παραγωγής ήχου και ηχογράφησης, με την εκτέλεση πειραματικής μουσικής. Η σύνθεση προσφέρει μια ανοιχτή φόρμα για τη μεταγραφή του γεγονότος και της εμπειρίας, αντί να βασίζεται σε δείγματα ηχογραφήσεων πεδίου, προκειμένου να μεταδώσει τις ποιότητες του τόπου και μια πολυαισθητηριακή επέκταση της ακρόασης.»<cite>— Kevin Corcoran, 2026</cite></div></div>
+    </div>
+    <div class="piece-block">
+      <div class="piece-header"><div class="piece-name">Lost Operas</div><div class="piece-composer-tag">Anton Lukoszevieze · 2024</div></div>
+      <div class="piece-body">Δημιουργήθηκαν μεταξύ 2015–2023. Είναι 17 γραφικές παρτιτούρες που αποτελούνται από κολλάζ αλλά και σκαριφήματα, και αποτελούν επιλογές του συνθέτη από 256 σελίδες. Στη συναυλία θα παρουσιαστούν για πρώτη φορά 4 από αυτές.<div class="piece-quote">«Οι Lost Operas αριθμούν περίπου 256 μονοσέλιδα έργα, τα οποία μπορούν να εκτελεστούν ή να ερμηνευτούν με πολλούς διαφορετικούς τρόπους. Δεν υπάρχουν ακριβείς οδηγίες για κάθε όπερα, πέρα από το ότι η ερμηνεία πρέπει να δημιουργεί κάτι καινούργιο — όχι απλώς έναν γενικό αυτοσχεδιασμό, αλλά κάτι που διαθέτει νέα μορφή, δομή και έναν συνδυασμό μουσικών ήχων και ήχων του πραγματικού κόσμου. Η λέξη «όπερα» προέρχεται από την ιταλική λέξη opera, που σημαίνει «έργο».»<cite>— Anton Lukoszevieze, 2026</cite></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="big-divider"><div class="big-divider-text" data-drift="1">WORLD · PREMIERE · 17.04.2026</div></div>
+
+<section class="s-solid">
+  <div class="inner reveal">
+    <div class="s-label">Σχετικά με τους συνθέτες</div>
+    <div class="composer-grid">
+      <div class="composer-card"><div class="c-name">lo wie</div><div class="c-bio">Η lo wie συνθέτει, ερμηνεύει και γράφει μέσα στο πλαίσιο της καθημερινότητας. Έγραψε τα «Beckett's Typist» (2011) και «Letter from Nobody» (2025), ενώ διοργανώνει τη σειρά υπαίθριων συναυλιών 〈namsan〉 από το 2014.</div></div>
+      <div class="composer-card"><div class="c-name">Andrew Weathers</div><div class="c-bio">Ο Andrew Weathers (1988) είναι συνθέτης, αυτοσχεδιαστής και διαμεσικός καλλιτέχνης που εδρεύει στο Πουέμπλο του Κολοράντο, μετά από μια διαμορφωτική περίοδο στο Δυτικό Τέξας, το Bay Area και τη Βόρεια Καρολίνα. Το έργο του επικεντρώνεται κυρίως στον τόπο, τη διάρκεια και την επανάληψη, στοιχεία που εξερευνά μέσω ηχογραφήσεων πεδίου, ψυχογεωγραφικών μεθόδων και αναδρομικών αντηχήσεων. Έχει συνεργαστεί με ένα ευρύ φάσμα καλλιτεχνών που δραστηριοποιούνται σε ετερόκλητα ρεύματα μέσων, προσεγγίσεων και αισθητικής. Το 2008, ο Weathers ίδρυσε τη Full Spectrum Records, ξεκινώντας μια μακροχρόνια δέσμευση στην παραγωγή και την επιμέλεια, που επεκτάθηκε σε μια σειρά από πρότζεκτ για τις εταιρείες Other Minds Records και Rural Situationism. Μετά από 16 χρόνια και 175 κυκλοφορίες, η Full Spectrum ολοκλήρωσε τον κύκλο της το 2024. Σήμερα επιμελείται τις δισκογραφικές Editions Glomar και Bastard Countryside, ενώ συνεχίζει να εργάζεται ως παραγωγός και μηχανικός ήχου.</div></div>
+      <div class="composer-card"><div class="c-name">Kevin Corcoran</div><div class="c-bio">Ο Kevin Corcoran εργάζεται με τον ήχο μέσω των κρουστών και των ηχογραφήσεων πεδίου σε πλαίσια μουσικής, τέχνης και τόπου. Με έδρα το Σαν Φρανσίσκο της Καλιφόρνια, η προσέγγισή του στα κρουστά δίνει έμφαση στην υφή, την τριβή, τη συμπαθητική δόνηση και τη χρήση αντικειμένων, τα οποία περιστασιακά εμπλουτίζονται μέσω ενίσχυσης, μετάδοσης και ανάδρασης. Συνεργαζόμενος με μουσικούς, χορευτές και εικαστικούς, ο αυτοσχεδιασμός και η συνεργασία αποτελούν κρίσιμες πτυχές της πρακτικής του. Ενεργός από τις αρχές της δεκαετίας του 2000, έχει εμφανιστεί στις ΗΠΑ, το Ηνωμένο Βασίλειο, το Μεξικό, την Ευρώπη και την Ανατολική Ασία, έχει εκθέσει ηχητικές εγκαταστάσεις και έχει κυκλοφορήσει άλμπουμ σε μικρές δισκογραφικές πειραματικής μουσικής.</div></div>
+      <div class="composer-card"><div class="c-name">Anton Lukoszevieze</div><div class="c-bio">Απόγονος ενός υποχωρούντος στρατιώτη του Ναπολέοντα και μιας Λιθουανής ευγενούς, ο Anton Lukoszevieze είναι τσελίστας, συνθέτης, αυτοσχεδιαστής και διεπιστημονικός καλλιτέχνης. Είναι επίσης ο ιδρυτής και διευθυντής του πειραματικού μουσικού συνόλου Apartment House, έχοντας κυκλοφορήσει μαζί τους πάνω από 60 άλμπουμ μέχρι σήμερα. Το πιο πρόσφατο σόλο άλμπουμ του είναι το «Le Jardin des Plantes’» από την εταιρεία The Trilogy Tapes (Ηνωμένο Βασίλειο).
+</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="s-frost">
+  <div class="inner reveal">
+    <div class="about-cols">
+      <div class="about-col-label">Σχετικά<br>με τους<br>6daEXIt</div>
+      <div>
+        <p class="about-text">Το σύνολο αυτοσχεδιασμού και πειραματικής μουσικής 6daEXIt Improvisation Ensemble δημιουργήθηκε στη Θεσσαλονίκη το 2007 μέσα από το μάθημα αυτοσχεδιασμού του Αλέξη Πορφυριάδη στο Τμήμα Μουσικών Σπουδών του ΑΠΘ (2005–09). Από το 2012 το σύνολο συνέχισε την πορεία του αυτόνομα, διατηρώντας ευέλικτη δομή με μεταβαλλόμενο αριθμό συντελεστών.</p>
+        <p class="about-text">Οι 6daEXIt είναι μια ανοιχτή συλλογικότητα στην οποία μπορεί να λάβει μέρος ο καθένας μετά από τη σύμφωνη γνώμη των μελών της ομάδας. Έχουν παρουσιαστεί σε φεστιβάλ, στο Μέγαρο Μουσικής Θεσσαλονίκης, σε αυτοδιαχειριζόμενους χώρους και χώρους τεχνών σε όλη την Ελλάδα.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /lang-el -->
+
+<!-- ══ ENGLISH ══ -->
+<div id="lang-en" style="display:none">
+
+<section class="s-transparent">
+  <div class="inner reveal">
+    <div class="s-label">About the concert</div>
+    <p class="intro-body"><strong>6daEXIt Improvisation Ensemble</strong> 6daEXIt Improvisation Ensemble presents four works of contemporary experimental music. These pieces resulted from a call for scores—specifically for <strong>graphic and verbal notation—issued </strong>  to composers from around the world, and will be performed here for the second time after their <strong>world premiere </strong>  at 6daEXIt’s concert at KET (Athens, 17-4-2026). Three of these works were written specifically for 6daEXIt.
+
+The ensemble focuses on open-form works that redefine the relationship between composer, performer, and listener. In this context, the score is not a final blueprint of predetermined notes, but rather a set of rules, intentions, strategies, and stimuli that correspond to actions of varying degrees of specificity. These works thus establish a framework for action and perception—a prime example being the piece -6-, which unfolds as a continuous enactment throughout the concert, creating a context that encompasses all other events without overtly masking them.
+
+The final form of each work remains fluid, shaped in real-time by the ensemble. Through active listening and interaction, every performance becomes a unique, unrepeatable sonic iteration. These practices explore the common ground between the concept of a composed work and partially controlled free—non-idiomatic—improvisation.</p>
+  </div>
+</section>
+
+<div class="big-divider"><div class="big-divider-text" data-drift="-1">GRAPHIC · VERBAL · SCORE</div></div>
+
+<section class="s-solid">
+  <div class="inner reveal">
+    <div class="s-label">Program</div>
+    <ul class="prog-list">
+      <li class="prog-item"><div class="prog-num">01</div><div><div class="prog-title-text">-6-</div><div class="prog-composer-text">lo wie, 2025</div></div><div class="prog-flag">* **</div></li>
+      <li class="prog-item"><div class="prog-num">02</div><div><div class="prog-title-text">Reverse Horizon</div><div class="prog-composer-text">Andrew Weathers, 2025</div></div><div class="prog-flag">*</div></li>
+      <li class="prog-item"><div class="prog-num">03</div><div><div class="prog-title-text">Figure Ground</div><div class="prog-composer-text">Kevin Corcoran, 2025</div></div><div class="prog-flag">*</div></li>
+      <li class="prog-item"><div class="prog-num">04</div><div><div class="prog-title-text">Lost Opera 4</div><div class="prog-composer-text">Anton Lukoszevieze, 2024</div></div><div class="prog-flag"></div></li>
+      <li class="prog-item"><div class="prog-num">05</div><div><div class="prog-title-text">Lost Opera 13</div><div class="prog-composer-text">Anton Lukoszevieze, 2024</div></div><div class="prog-flag"></div></li>
+      <li class="prog-item"><div class="prog-num">06</div><div><div class="prog-title-text">Lost Opera 6</div><div class="prog-composer-text">Anton Lukoszevieze, 2024</div></div><div class="prog-flag"></div></li>
+      <li class="prog-item"><div class="prog-num">07</div><div><div class="prog-title-text">Lost Opera 7</div><div class="prog-composer-text">Anton Lukoszevieze, 2024</div></div><div class="prog-flag"></div></li>
+    </ul>
+    <div class="legend-box">
+      <p>* Work written for 6daEXIt</p>
+      <p>** The performance of this piece lasts for the entire duration of the concert</p>
+    </div>
+  </div>
+</section>
+
+<section class="s-frost">
+  <div class="inner-wide reveal">
+    <div class="s-label">6daEXIt on 17 April 2026</div>
+    <div class="performers-wrap">
+      <div class="performer-item"><div class="p-name">Ioanna Valsamara</div><div class="p-instrument">synthesizer</div></div>
+      <div class="performer-item"><div class="p-name">Yiannis Dimitroudis</div><div class="p-instrument">synthesizer</div></div>
+      <div class="performer-item"><div class="p-name">Lina Koukouli</div><div class="p-instrument">melodica, bullhorn,<br>slide whistle, objects</div></div>
+      <div class="performer-item"><div class="p-name">Fotis Lazidis</div><div class="p-instrument">tablet, fx</div></div>
+      <div class="performer-item"><div class="p-name">Alexandros Ntouzas</div><div class="p-instrument">electric guitar</div></div>
+      <div class="performer-item"><div class="p-name">Josephine Papalamprou</div><div class="p-instrument">electric bass, objects</div></div>
+      <div class="performer-item"><div class="p-name">Chrysi Parpara</div><div class="p-instrument">accordion, objects</div></div>
+      <div class="performer-item"><div class="p-name">Alexis Porfiriadis</div><div class="p-instrument">piano</div></div>
+      <div class="performer-item"><div class="p-name">Antonis Fotiadis</div><div class="p-instrument">saxophone</div></div>
+      <div class="performer-item"><div class="p-name">Yorgos Holopoulos</div><div class="p-instrument">laptop, objects</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="s-photo-break">
+  <img src="F8EF36D5-09AD-44FF-83F8-0A09BB306B6F.JPEG" alt="6daEXIt visual" loading="lazy">
+  <span class="s-photo-break-label">6daEXIt — 2026</span>
+</div>
+
+<section class="s-transparent">
+  <div class="inner reveal">
+    <div class="s-label">Notes on the pieces</div>
+    <div class="piece-block">
+      <div class="piece-header"><div class="piece-name">-6-</div><div class="piece-composer-tag">lo wie · 2025</div></div>
+      <div class="piece-body">6 sounds. The boundaries of performance or listening, of engagement or non-engagement, of unity and cohesion or their absence, within a work.<div class="piece-quote">"What is meant to be heard<br>will be heard of itself."<cite>— lo wie, 2026</cite></div></div>
+    </div>
+    <div class="piece-block">
+      <div class="piece-header"><div class="piece-name">Reverse Horizon</div><div class="piece-composer-tag">Andrew Weathers · 2025</div></div>
+      <div class="piece-body"><div class="piece-quote">"For many years, I lived in the Llano Estacado of West Texas, a sparsely populated but vast tablelands region. Our resident country singer Terry Allen jokes that on a clear day you can see the back of your own head if you look hard enough. Without topography, urban skylines, a treeline, horizon is the defining feature of this land. I wrote Reverse Horizon right before moving away from the Llano permanently, leaving the wide open for a world more claustrophobic. The marks on the score are derived from viewsheds and routes between the Llano and Pueblo, Colorado, my new home. As ever, it's an attempt to find an equilibrium between memory and rootedness, maybe it's in a contour or in a melody."<cite>— Andrew Weathers, 2026</cite></div></div>
+    </div>
+    <div class="piece-block">
+      <div class="piece-header"><div class="piece-name">Figure Ground</div><div class="piece-composer-tag">Kevin Corcoran · 2025</div></div>
+      <div class="piece-body"><div class="piece-quote">""Figure Ground begins with a soundwalk as an embodied practice of field recording which is transcribed into musical score for ensemble performance. During the soundwalk, linear inscriptions made by walking over varied terrain with pen and paper in hand are accompanied by photographs detailing the materiality of stone, soil, duff, wood, and sand traversed over ground. The inscriptions and images take the place of audio field recording in order to experience listening as a practice felt as vibration throughout the body, not limited to perception through the eardrum. As a musical score, these lines become suggestions for playing an instrument in an open way, such as the use of extended techniques or found objects, and traversing the performance space while carrying an instrument. The photographs detailing coarse, fine, and smooth qualities of terrain, composition of the ground from which the soundwalk’s linear figures emerge, become visual suggestions for musical timbres. These visual aspects of the score are accompanied by short texts describing approaches of the walk, setting a tone for musical decisions of pacing, access, balance, and interaction.
+
+Figure Ground combines aesthetic practices of environmental listening, sound-making, and recording, with the performance of experimental music. The composition offers an open form for transcription of event and experience, rather than relying on samples of field recordings, to convey qualities of place and a multisensory expansion of listening."<cite>— Kevin Corcoran, 2026</cite></div></div>
+    </div>
+    <div class="piece-block">
+      <div class="piece-header"><div class="piece-name">Lost Operas</div><div class="piece-composer-tag">Anton Lukoszevieze · 2024</div></div>
+      <div class="piece-body">Created between 2015 and 2023, these 17 graphic scores consist of collages and sketches, selected from a total of 256 pages. Four of these will be premiered at this concert.<div class="piece-quote">"Lost Operas number some 256 single page works, which can be performed or interpreted in many different ways.
+There are no exact instructions for each opera, except for that the performance should create something new, not just a general improvisation, but something that has a new form, structure and combination of musical and concrete sounds, intuitively or pre-determined, using any means. The word opera comes from the Italian work opere, meaning ‘works’." 
+<cite>— Anton Lukoszevieze, 2026</cite></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="big-divider"><div class="big-divider-text" data-drift="1">WORLD · PREMIERE · 17.04.2026</div></div>
+
+<section class="s-solid">
+  <div class="inner reveal">
+    <div class="s-label">About the composers</div>
+    <div class="composer-grid">
+      <div class="composer-card"><div class="c-name">lo wie</div><div class="c-bio">lo wie composes, performs, and writes within everyday life. She wrote Beckett's Typist (2011), Letter from Nobody (2025) and has been organizing the outdoor concert series 〈namsan〉 since 2014.</div></div>
+      <div class="composer-card"><div class="c-name">Andrew Weathers</div><div class="c-bio">Andrew Weathers (1988) is a composer, improviser, and intermedia artist currently based in the Pueblo, Colorado after spending forative time in West Texas, the Bay Area, and North Carolina. His work is primarily concerned with place, duration, and repetition, explored through field recording, psychogeographic methods, and recursive resonances. Weathers has collaborated alongside a wide swath of artists inhabiting disparate currents of media, approaches, and aesthetics.In 2008, Weathers founded Full Spectrum Records, beginning a long-standing commitment to production and curation that went on to encompass a number of projects for Other Minds Records and Rural Situationism. After 16 years and 175 releases, Full Spectrum came to an end in 2024. He currently curates the imprints Editions Glomar and Bastard Countryside and continues to work as an in-demand producer and audio engineer.</div></div>
+      <div class="composer-card"><div class="c-name">Kevin Corcoran</div><div class="c-bio">Kevin Corcoran works with sound through percussion and location recordings in contexts of music, art, and place. Based in San Francisco, California, his approach to percussion emphasizes texture, friction, sympathetic vibration, and the use of found objects, occasionally augmented by amplification, transmission, and feedback. Working with musicians, dancers, and visual artists, improvisation and collaboration are crucial aspects of his practice. Active since the early 2000s Kevin has performed in the US, UK, Mexico, Europe and East Asia, exhibited sound installations, and released albums on small imprints dedicated to experimental music.</div></div>
+      <div class="composer-card"><div class="c-name">Anton Lukoszevieze</div><div class="c-bio">Descended from a retreating Napoleonic soldier and a Lithuanian noblewoman, Anton Lukoszevieze is a cellist, composer, improviser and multidisciplinary artist. He is also the founder and director of the experimental music group Apartment House, releasing over 60 albums with them to date. His most recent solo album is ‘Le Jardin des Plantes’ on The Trilogy Tapes, UK.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="s-frost">
+  <div class="inner reveal">
+    <div class="about-cols">
+      <div class="about-col-label">About<br>6daEXIt</div>
+      <div>
+        <p class="about-text">6daEXIt Improvisation Ensemble started in 2007 at the Aristotle University of Thessaloniki as the offshoot of a music improvisation course held by Alexis Porfiriadis at the Department of Music Studies (2005–2009). Since 2012, 6daEXIt is an independent improvisation and experimental music ensemble based in the center of Thessaloniki. 6daEXIt is an open collective — anyone can become a member if the group agrees.</p>
+        <p class="about-text">In the past 18 years, 6daEXIt have collaborated with painters, dancers, performers, and video artists, performing at festivals, the Thessaloniki Concert Hall, the Onassis Cultural Center Athens, and numerous self-managed and arts venues across Greece and internationally.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /lang-en -->
+
+<footer class="footer">
+  <div class="footer-brand">6daEXIt</div>
+  <div class="footer-link"><a href="https://linktr.ee/6daEXIt" target="_blank" rel="noopener">linktr.ee/6daEXIt</a></div>
+</footer>
+
+</div><!-- /page -->
+
+<script>
+  const heroText = {
+    el: {
+      eyebrow: '6daEXIt Improvisation Ensemble — Θεσσαλονίκη 2026',
+      subtitle: 'Παγκόσμιες Πρεμιέρες',
+      labelDate: 'Ημερομηνία',
+      date: 'Παρασκευή<br>17 Απριλίου 2026',
+      labelComp: 'Συνθέτες',
+    },
+    en: {
+      eyebrow: '6daEXIt Improvisation Ensemble — Thessaloniki 2026',
+      subtitle: 'World Premieres',
+      labelDate: 'Date',
+      date: 'Friday<br>17 April 2026',
+      labelComp: 'Composers',
+    }
+  };
+
+  function setLang(lang) {
+    document.getElementById('lang-el').style.display = lang === 'el' ? 'block' : 'none';
+    document.getElementById('lang-en').style.display = lang === 'en' ? 'block' : 'none';
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+    document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+    // Update hero
+    const t = heroText[lang];
+    document.getElementById('hero-eyebrow').textContent = t.eyebrow;
+    document.getElementById('hero-subtitle').textContent = t.subtitle;
+    document.getElementById('hero-label-date').textContent = t.labelDate;
+    document.getElementById('hero-date').innerHTML = t.date;
+    document.getElementById('hero-label-comp').textContent = t.labelComp;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  revealEls.forEach(el => obs.observe(el));
+
+  // Parallax + marquee drift on scroll
+  let ticking = false;
+  window.addEventListener('scroll', () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      const y = window.scrollY;
+      // bg parallax
+      document.getElementById('bgPhoto').style.transform = `translateY(${y * 0.16}px)`;
+      // marquee drift
+      document.querySelectorAll('.big-divider-text').forEach(el => {
+        const dir = el.dataset.drift === '1' ? 1 : -1;
+        el.style.transform = `translateX(${dir * y * 0.035}px)`;
+      });
+      ticking = false;
+    });
+  }, { passive: true });
+</script>
+</body>
+</html>
